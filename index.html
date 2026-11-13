@@ -221,10 +221,38 @@ aside #scribble svg { display: block; width: 100%; height: 100%; }
   summary { min-height: 130px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+
+body{background:#f7f6f2;--off-white:#f7f6f2;--off-black:#222526;font-family:"Be Vietnam Pro",sans-serif;color:#222526;font-size:17px}
+.gallery-nav{max-width:1500px;margin:auto;padding:24px 36px;border-bottom:1px solid #ccc;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:12px;letter-spacing:.12em}
+.gallery-nav b{letter-spacing:.24em;font-size:17px}.gallery-nav button,.studio-top button{background:#222526;color:#fff;border:0;padding:12px 16px;cursor:pointer;font:inherit}
+#container{max-width:1500px;margin:auto;gap:clamp(30px,4vw,70px);padding:clamp(20px,4vw,60px);align-items:flex-start}
+#container>*{background:transparent}main{border:0;padding:0;flex:1.3;min-width:0}
+main>h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(40px,5vw,76px);letter-spacing:-.05em;line-height:1.09}
+main>h2{font-family:Georgia,serif;font-weight:400;letter-spacing:-.03em}
+main p{line-height:1.7}main img{border:0}
+#use-cases{display:flex;gap:0;border-bottom:1px solid #bbb}
+.use-case{border:0!important;background:transparent!important;margin:0!important}
+summary{background:none!important;height:auto;min-height:0;padding:17px 10px;font-size:13px;text-align:center;border-bottom:3px solid transparent;line-height:1.35}
+.use-case.open summary{border-bottom-color:#222526;font-weight:500}
+.use-case:hover summary{background:#e9e9e3!important}
+#story-div{height:330px;overflow:auto;overscroll-behavior:contain;padding:26px;margin:0 0 44px;background:#fff;border:1px solid #ddd;border-top:0;font-family:Georgia,serif;font-size:17px;line-height:1.6}
+aside{position:sticky;top:24px;flex:1;min-width:0;max-height:none;border:0;padding:0;gap:18px;align-items:stretch}
+.studio-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ccc;padding-bottom:12px;font-size:12px;letter-spacing:.12em}
+.studio-top button{background:transparent;color:#222526}
+.studio-intro{font-family:Georgia,serif;font-size:26px;margin:0}
+aside #scribble{width:min(100%,437px);height:auto;aspect-ratio:1748/2480;margin:auto;border:14px solid #e8e7e2;box-shadow:0 12px 24px #00000010}
+aside .scribble-inputs{width:100%;gap:8px}
+aside input,aside button{border-radius:0;font-size:13px}
+body.studio-expanded{overflow:hidden}
+body.studio-expanded #studio{position:fixed;inset:0;z-index:100;background:#f7f6f2;padding:25px max(25px,calc((100vw - 750px)/2));overflow:auto;box-shadow:0 0 0 100vmax #0008;align-items:center}
+body.studio-expanded #studio .studio-top{width:100%}
+body.studio-expanded #studio .scribble-inputs{max-width:600px}
+body.studio-expanded #close-studio{display:block}
+@media(max-width:950px){.gallery-nav{padding:18px}.gallery-nav span{display:none}#container{flex-direction:column}main{order:2;width:100%}aside{order:1;position:static;width:100%;max-width:650px;margin:auto}#use-cases{flex-direction:row}summary{font-size:12px}}
 </style>
 </head>
 <body>
-	<div id="container">
+	<header class="gallery-nav"><b>SECRET HASHES</b><span>AN EXHIBITION OF THINGS UNSAID</span><button id="open-studio">Open studio ↗</button></header><div id="container">
 		<main>
 			<h1>Once you know a secret, <br /> it no longer is one. </h1>
 			<p>
@@ -237,7 +265,7 @@ aside #scribble svg { display: block; width: 100%; height: 100%; }
 			<p>
 				Here are some secrets I’d like to share using Secret Hashes in my own life.
 			</p>
-			<div id="use-cases">
+			<div id="use-cases" role="tablist" aria-label="Sample secrets">
 				<div class="use-case open">
 					<summary id="father">
 						You are my father.
@@ -293,7 +321,7 @@ aside #scribble svg { display: block; width: 100%; height: 100%; }
 					</div>
 				</div>
 			</div>
-			<div id="story-div">
+			<div id="story-div" role="tabpanel" tabindex="0">
 				<!-- This should eventually be empty to start with "father" content loaded programmatically. Hard coding for now. -->
 				<div class="father">
 					<p>
@@ -386,7 +414,7 @@ aside #scribble svg { display: block; width: 100%; height: 100%; }
 			</p>
 		</main>
 
-		<aside>
+		<aside id="studio"><div class="studio-top"><span>YOUR STUDIO / 01</span><button id="expand-studio">Expand ↗</button></div><p class="studio-intro">An artwork only you know the meaning of.</p>
 			<div class="scribble-inputs">
 				<input id="secret" type="text" autocomplete="off" spellcheck="false" aria-label="Your secret" placeholder="Type your secret here."/>
 				<button id="drawButt" type="button">
@@ -401,9 +429,9 @@ aside #scribble svg { display: block; width: 100%; height: 100%; }
 			<div class="scribble-inputs">
 				<button id="download-svg" type="button" disabled>Download SVG</button><button id="download-png" type="button" disabled>Download PNG</button>
 			</div>
-		<div id="status" role="status" aria-live="polite">Type a secret, then draw.</div></aside>
+		<div id="status" role="status" aria-live="polite">Type a secret, then draw.</div><button id="close-studio" hidden>Close studio ×</button></aside>
 	</div>
 		
-	<script src="./script.js"></script>
+	<script src="./script.js"></script><script src="./gallery.js"></script>
 </body>
 </html>
