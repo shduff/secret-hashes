@@ -1,7 +1,8 @@
 "use strict";
 const studio=document.getElementById("studio"),open=document.getElementById("open-studio"),expand=document.getElementById("expand-studio"),close=document.getElementById("close-studio");
-function toggleStudio(on){document.body.classList.toggle("studio-expanded",on);close.hidden=!on;expand.textContent=on?"Collapse ↙":"Expand ↗";expand.setAttribute("aria-expanded",String(on));if(on)close.focus();else open.focus();}
+function toggleStudio(on){document.body.classList.toggle("studio-expanded",on);close.hidden=!on;studio.setAttribute("aria-hidden",String(!on));expand.textContent=on?"Collapse ↙":"Expand ↗";expand.setAttribute("aria-expanded",String(on));if(on)close.focus();else open.focus();}
 open.addEventListener("click",()=>toggleStudio(true));
+document.getElementById("encode-secret").addEventListener("click",()=>toggleStudio(true));
 expand.addEventListener("click",()=>toggleStudio(!document.body.classList.contains("studio-expanded")));
 close.addEventListener("click",()=>toggleStudio(false));
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&document.body.classList.contains("studio-expanded"))toggleStudio(false);});
