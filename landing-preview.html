@@ -66,7 +66,7 @@ textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #9
 .philosophy{border-top:none;padding-top:clamp(25px,4vw,55px)}
 .hero{min-height:0;padding-bottom:0}
 @media(max-width:450px){.entry-row #drawButt{padding:6px 11px}.canvas-footer .download-actions button{padding:6px 8px}}
-.merch-line{margin-top:20px;line-height:1.6}.left{display:flex;flex-direction:column}.product-mosaic{margin:14px 0 10px;width:100%;overflow:hidden}.product-mosaic img{display:block;width:100%;height:auto;object-fit:cover}.merch-line{margin-top:12px}.hero-grid{align-items:stretch}.right{align-self:start}@media(min-width:851px){.left{min-height:100%}.product-mosaic{margin-top:auto;padding-top:16px}} </style></head><body>
+.merch-line{margin-top:20px;line-height:1.6}.left{display:flex;flex-direction:column}.product-mosaic{margin:14px 0 10px;width:100%;overflow:hidden}.product-mosaic img{display:block;width:100%;height:auto;object-fit:cover}.merch-line{margin-top:12px}.hero-grid{align-items:stretch}.right{align-self:start}@media(min-width:851px){.left{min-height:100%}.product-mosaic{margin-top:auto;padding-top:16px}} .behind-link{align-self:center;display:inline-flex;align-items:center;gap:10px;margin:clamp(24px,4vh,48px) auto 12px;padding:8px 12px;color:#606761;text-decoration:none;font-size:12px;letter-spacing:.06em;transition:color .15s}.behind-link span{font-size:20px;line-height:1}.behind-link:hover{color:#242827}@media(max-width:850px){.behind-link{margin-top:26px}}</style></head><body>
 <section class="hero" aria-labelledby="page-title">
 <div class="hero-grid">
 <div class="left">
@@ -79,13 +79,14 @@ textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #9
 </div>
 <div class="right">
 <div class="secret-entry"><label class="prompt" for="secret">Encode your secret</label>
-<p class="prompt-note">Type a secret and click Draw to turn it into a one-of-a-kind scribble. You can redraw the same secret as many times as you like until you find a version you love, then download it to print or share.</p>
+<p class="prompt-note">Type a secret and click Draw. You can redraw the same secret as many times as you like, then download it to print or share.</p>
 <div class="entry-row"><textarea id="secret" rows="2" aria-label="Your secret" spellcheck="false" autocomplete="off"></textarea><button id="drawButt" type="button"><span id="drawButtText">draw</span></button></div>
 </div>
 
 <div id="scribble" role="img" aria-label="Your generated secret scribble"><div id="no-secret" hidden></div><div id="no-scribble" hidden></div></div>
 <div class="canvas-footer"><span class="canvas-label">Your secret, drawn</span><div class="download-actions"><button id="download-svg" type="button" disabled>↓ SVG</button><button id="download-png" type="button" disabled>↓ PNG</button></div></div><div id="status" role="status" aria-live="polite"></div>
 </div></div>
+<a class="behind-link" href="#philosophy">Behind the scribble <span aria-hidden="true">↓</span></a>
 </section>
 <section id="philosophy" class="philosophy"><article class="reading"><h2>A secret, for example</h2><h3 class="story-title">You are my father.</h3><div class="father-story">
 				
