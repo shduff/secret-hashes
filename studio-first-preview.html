@@ -281,10 +281,32 @@ body.studio-expanded #studio #close-studio{display:block!important}
 .gallery-nav #open-studio{display:none}
 #story-div{height:330px}
 @media(max-width:650px){#container{gap:36px}#container #studio{padding:22px 16px}#studio #scribble{width:min(100%,280px)}}
+
+/* Single card-front, unified gallery layout. */
+body{background:#f7f6f2}
+#container{max-width:960px;padding:clamp(20px,4vw,48px) 24px;gap:32px}
+.site-intro{width:100%;max-width:760px;margin:0 auto;text-align:center}
+.site-intro .intro-label{font-size:11px;letter-spacing:.18em;color:#777a76}
+.site-intro h1{font-family:Georgia,serif;font-size:clamp(50px,8vw,94px);font-weight:400;letter-spacing:-.06em;line-height:1.05;margin:18px 0}
+.site-intro p{font-family:Georgia,serif;font-size:clamp(18px,2.5vw,23px);line-height:1.5;max-width:640px;margin:0 auto}
+#container #studio{background:transparent;border:0;box-shadow:none;padding:14px 0 30px;max-width:760px;width:100%;gap:16px}
+#studio .studio-top{display:none}
+#studio .studio-intro{font-size:22px;margin:0;text-align:center}
+#studio #scribble{aspect-ratio:1240/1748;width:min(100%,340px);height:auto;max-width:340px;border:1px solid #deded8;box-shadow:0 8px 22px #0000000b;background:white}
+#studio .scribble-inputs{width:100%;max-width:640px}
+#container main{width:100%;max-width:760px;margin:0 auto;min-width:0}
+main>h1{font-size:clamp(34px,5vw,55px)}
+main>h1 br{display:none}
+main>h2{font-size:clamp(24px,3vw,34px)}
+main>img,main img{width:100%;max-width:100%;height:auto;object-fit:contain;display:block;margin:28px auto}
+main p,main li,main dd,main dl,main ol{max-width:100%}
+#use-cases,#story-div{width:100%;max-width:100%}
+#story-div{height:330px}
+@media(max-width:650px){#container{padding:22px 18px;gap:26px}.site-intro h1{font-size:54px}#container #studio{padding:0 0 20px}#studio #scribble{width:min(100%,300px)}}
 </style>
 </head>
 <body>
-	<header class="gallery-nav"><b>SECRET HASHES</b><span>AN EXHIBITION OF THINGS UNSAID</span><button id="open-studio">Open studio ↗</button></header><div id="container">
+	<div id="container"><section class="site-intro"><div class="intro-label">AN EXHIBITION OF THINGS UNSAID</div><h1>Secret Hashes</h1><p>Turn something you can’t quite say into something you can share. Write a secret, transform it into a one-of-a-kind scribble, and download the artwork to print or keep.</p></section>
 		<main><div class="gallery-intro"><span class="gallery-kicker">THE ART OF KEEPING SECRETS</span><button class="studio-cta" id="encode-secret" type="button">Encode your own secret <span aria-hidden="true">↗</span></button></div>
 			<h1>Once you know a secret, <br /> it no longer is one. </h1>
 			<p>
@@ -464,6 +486,6 @@ body.studio-expanded #studio #close-studio{display:block!important}
 		<div id="status" role="status" aria-live="polite">Type a secret, then draw.</div><button id="close-studio" hidden>Close studio ×</button></aside>
 	</div>
 		
-	<script src="./script.js"></script>
+	<script src="./studio-first.js"></script>
 </body>
 </html>
