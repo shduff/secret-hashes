@@ -258,5 +258,5 @@ textarea:focus:not(:focus-visible){outline:none}
 
 <script src="./landing.js"></script>
 <script>
-(()=>{const studio=document.getElementById("drawing-area"),link=document.querySelector(".mobile-draw-return");if(!studio||!link)return;const update=()=>{const r=studio.getBoundingClientRect(),vh=window.innerHeight;const above=r.top>vh*.65,below=r.bottom<vh*.35;link.classList.toggle("is-visible",window.innerWidth<=850&&(above||below));link.textContent=above?"↓ Draw":"↑ Draw";link.setAttribute("aria-label",above?"Scroll down to drawing area":"Scroll up to drawing area")};window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);update()})();
+(()=>{const studio=document.getElementById("drawing-area"),link=document.querySelector(".mobile-draw-return");if(!studio||!link)return;const update=()=>{const r=studio.getBoundingClientRect(),vh=window.innerHeight;const above=r.top>=vh,below=r.bottom<=0;link.classList.toggle("is-visible",window.innerWidth<=850&&(above||below));link.textContent=above?"↓ Draw":"↑ Draw";link.setAttribute("aria-label",above?"Scroll down to drawing area":"Scroll up to drawing area")};window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);update()})();
 </script></body></html>
