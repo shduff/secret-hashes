@@ -83,7 +83,7 @@ draw.addEventListener("click",()=>{
   }catch(err){console.error(err);setStatus("Drawing failed. Please try again.");}
 });
 input.addEventListener("input",()=>{
-  if(currentSVG){svgButton.disabled=pngButton.disabled=true;drawText.textContent="draw";setStatus("Secret changed. Click draw to encode.");}
+  if(currentSVG){drawText.textContent="draw";setStatus("Secret changed. Click draw to encode new secret.");}
 });
 svgButton.addEventListener("click",()=>{if(currentSVG)download(new Blob([currentSVG],{type:"image/svg+xml;charset=utf-8"}),"secret-hash.svg");});
 pngButton.addEventListener("click",()=>{
