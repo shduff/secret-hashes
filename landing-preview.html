@@ -139,6 +139,16 @@ textarea:focus:not(:focus-visible){outline:none}
 .mobile-draw-return.is-visible{opacity:1;visibility:visible;pointer-events:auto}
 }
 @media(prefers-reduced-motion:reduce){.mobile-draw-return{transition:none}}
+
+/* Mobile reading order: introduction and products, then studio, then essay. */
+@media(max-width:850px){
+.intro-heading h1{order:1}
+.intro-heading .opening-line{order:2}
+.left-story{order:3}
+.right{order:4;padding-top:24px}
+.left>.philosophy{order:5}
+.secret-entry .mobile-explanation{display:none}
+}
 </style></head><body>
 <section class="hero" aria-labelledby="page-title">
 <div class="hero-grid">
