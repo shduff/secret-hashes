@@ -127,13 +127,12 @@ textarea:focus:not(:focus-visible){outline:none}
 /* Secret entry has no visual focus treatment, including keyboard focus. */
 #secret:focus,#secret:focus-visible,#secret:active{outline:none!important;outline-offset:0!important;box-shadow:none!important;border-color:#a9aca5!important;appearance:none}
 
-.mobile-title-explanation,.mobile-draw-return{display:none}
+.mobile-draw-return{display:none}
 @media(max-width:850px){
 .intro-heading{display:contents}
 .intro-heading h1{order:1}
-.intro-heading .mobile-title-explanation{display:block;order:2;width:100%;margin:0 0 16px}
+.intro-heading .opening-line{order:2;margin:0 0 20px}
 .right{order:3;scroll-margin-top:12px}
-.intro-heading .opening-line{order:4}
 .left-story{order:5}
 .left>.philosophy{order:6}
 .mobile-draw-return{display:flex;position:fixed;bottom:calc(18px + env(safe-area-inset-bottom));right:18px;z-index:20;align-items:center;justify-content:center;padding:9px 15px;background:var(--ink);color:white;text-decoration:none;font-size:13px;border:1px solid var(--ink);box-shadow:0 3px 12px #0002;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s,visibility .18s}
@@ -145,7 +144,7 @@ textarea:focus:not(:focus-visible){outline:none}
 <div class="hero-grid">
 <div class="left">
 <div class="intro-heading"><h1 id="page-title">Secret Hashes</h1>
-<p class="intro-copy mobile-title-explanation"><strong>Secret Hashes</strong> offers you the opportunity to do just this. Using the one-way valve of cryptographic hash functions and the power of random walks to encode your secrets, you can share your sacred truths, vulnerability-free.</p>
+
 <p class="opening-line"><strong>Once you know a secret, it no longer is one.</strong></p></div>
 <div class="left-story">
 <p class="intro-copy">This is the kind of paradox I loved thinking about as a kid, like how you can’t seek enlightenment directly; how you’ll never know whether the red <em>you</em> see is the same red I do; how some ideas are forgotten while others are one-way valves, offering perspectives which, once you see them, can’t be unseen. But what if there was a way to share a secret while still keeping it? What if there was a way to entrust someone with your deepest truths without actually being vulnerable with them?</p>
@@ -235,6 +234,7 @@ textarea:focus:not(:focus-visible){outline:none}
 </div>
 <div class="right" id="drawing-area">
 <div class="secret-entry"><label class="prompt" for="secret">Encode your secret</label>
+<p class="intro-copy mobile-explanation"><strong>Secret Hashes</strong> offers you the opportunity to do just this. Using the one-way valve of cryptographic hash functions and the power of random walks to encode your secrets, you can share your sacred truths, vulnerability-free.</p>
 
 <p class="prompt-note">Type a secret and click Draw. You can redraw the same secret as many times as you like, then download it to print or share.</p>
 <div class="entry-row"><textarea id="secret" rows="2" aria-label="Your secret" spellcheck="false" autocomplete="off"></textarea><button id="drawButt" type="button"><span id="drawButtText">draw</span></button></div>
@@ -244,9 +244,9 @@ textarea:focus:not(:focus-visible){outline:none}
 <div class="canvas-footer"><div id="status" role="status" aria-live="polite"></div><div class="download-actions"><button id="download-svg" type="button" disabled>↓ SVG</button><button id="download-png" type="button" disabled>↓ PNG</button></div></div>
 </div></div>
 </section>
-<a class="mobile-draw-return" href="#drawing-area" aria-label="Back to drawing area">↑ Draw</a>
+<a class="mobile-draw-return" href="#drawing-area" aria-label="Go to drawing area">↓ Draw</a>
 
 <script src="./landing.js"></script>
 <script>
-(()=>{const studio=document.getElementById("drawing-area"),link=document.querySelector(".mobile-draw-return");if(!studio||!link)return;const update=()=>{const r=studio.getBoundingClientRect();link.classList.toggle("is-visible",window.innerWidth<=850&&r.bottom<window.innerHeight*.65)};window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);update()})();
+(()=>{const studio=document.getElementById("drawing-area"),link=document.querySelector(".mobile-draw-return");if(!studio||!link)return;const update=()=>{const r=studio.getBoundingClientRect(),vh=window.innerHeight;const above=r.top>vh*.65,below=r.bottom<vh*.35;link.classList.toggle("is-visible",window.innerWidth<=850&&(above||below));link.textContent=above?"↓ Draw":"↑ Draw";link.setAttribute("aria-label",above?"Scroll down to drawing area":"Scroll up to drawing area")};window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);update()})();
 </script></body></html>
