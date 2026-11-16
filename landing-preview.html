@@ -53,7 +53,7 @@ textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #9
 .secret-entry textarea{min-height:110px}
 .right{align-self:center}
 @media(max-width:850px){.left h1{font-size:clamp(54px,10vw,78px)}.right{align-self:stretch}}
-</style></head><body>
+.hero-grid{align-items:start}.left,.right{align-self:start}.left h1{margin-top:0}.right{padding-top:clamp(90px,8vw,121px)}.secret-entry{margin-bottom:20px}.secret-entry .prompt{font-size:clamp(18px,1.7vw,23px);line-height:1.4;font-weight:600;margin:0 0 20px}.secret-entry .prompt-note{margin:0 0 12px}.secret-entry textarea{min-height:62px;height:62px;padding:13px 15px}.control-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px}.control-row .actions,.control-row .download-actions{margin:0}.control-row .download-actions{justify-content:flex-end}.control-row .download-actions button{border-color:#b7bab4;color:#545b56;min-height:46px}#scribble{box-shadow:none}.canvas-label{justify-content:flex-end;margin:8px 0 0;text-transform:none;letter-spacing:.03em;font-size:12px}#status{margin-top:5px;min-height:20px}@media(max-width:850px){.right{padding-top:0}.hero-grid{gap:26px}}@media(max-width:480px){.control-row .download-actions{gap:5px}.control-row .download-actions button{padding:8px;font-size:12px}}</style></head><body>
 <section class="hero" aria-labelledby="page-title">
 <div class="hero-grid">
 <div class="left">
@@ -63,15 +63,14 @@ textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #9
 <p class="intro-copy"><strong>Secret Hashes</strong> offers you the opportunity to do just this. Using the one-way valve of cryptographic hash functions and the power of random walks to encode your secrets, you can share your sacred truths, vulnerability-free. Send it on a greeting card. Wear it on a hoodie. Share it with the world.</p>
 </div>
 <div class="right">
-<div class="secret-entry"><label class="prompt" for="secret">Encase your secret</label>
-<p class="prompt-note">Write something you want to share without revealing. Your words become a cryptographic hash, then a unique scribble. Only you know what it says; your words stay in this browser.</p>
-<textarea id="secret" placeholder="Type your secret here…" spellcheck="false" autocomplete="off"></textarea>
-<div class="actions"><button id="drawButt" type="button"><span id="drawButtText">draw</span></button></div>
+<div class="secret-entry"><label class="prompt" for="secret">Encode your secret</label>
+<p class="prompt-note">Write a secret and press Draw to begin.</p>
+<textarea id="secret" rows="2" placeholder="Type your secret here…" spellcheck="false" autocomplete="off"></textarea>
+<div class="control-row"><div class="actions"><button id="drawButt" type="button"><span id="drawButtText">draw</span></button></div><div class="download-actions"><button id="download-svg" type="button" disabled>↓ SVG</button><button id="download-png" type="button" disabled>↓ PNG</button></div></div>
 </div>
-<div class="canvas-label"><span>Your secret, drawn</span><span>01 / artwork</span></div>
+
 <div id="scribble" role="img" aria-label="Your generated secret scribble"><div id="no-secret" hidden></div><div id="no-scribble" hidden></div></div>
-<div id="status" role="status" aria-live="polite">Write a secret and press Draw to begin.</div>
-<div class="download-actions"><button id="download-svg" type="button" disabled>Download SVG</button><button id="download-png" type="button" disabled>Download PNG</button></div>
+<div class="canvas-label"><span>Your secret, drawn</span></div><div id="status" role="status" aria-live="polite"></div>
 </div></div>
 <a class="scroll-cue" href="#philosophy">Scroll for the philosophy (lol)<span aria-hidden="true">↓</span></a>
 </section>
