@@ -39,13 +39,18 @@ textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #9
 .reading ol{padding-left:24px}.reading .bold{font-weight:600}
 @media(max-width:850px){.hero{min-height:0;padding:24px 20px}.hero-grid{grid-template-columns:1fr;gap:34px}.product{height:190px}.right{padding-bottom:10px}.scroll-cue{margin-top:20px}h1{font-size:60px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-.story-title{font:italic 400 24px Georgia,serif;margin:0 0 20px}.father-story{margin-bottom:52px}</style></head><body>
+.story-title{font:italic 400 24px Georgia,serif;margin:0 0 20px}.father-story{margin-bottom:52px}/* The original opening essay now anchors the landing page. */
+.left h1{font-size:clamp(36px,4vw,61px);line-height:1.12;letter-spacing:-.045em;margin:0 0 24px}
+.intro-copy{font-size:clamp(14px,1.05vw,16px);line-height:1.68;max-width:65ch;margin:0 0 18px}
+.intro-copy strong{font-weight:600}
+@media(max-width:850px){.left h1{font-size:clamp(38px,7vw,55px)}}
+</style></head><body>
 <section class="hero" aria-labelledby="page-title">
 <div class="hero-grid">
 <div class="left">
-<div class="eyebrow">An exhibition of things unsaid</div>
-<h1 id="page-title">Secret Hashes</h1>
-<p class="lede">A way to share a secret without saying what it is. Turn your words into a one-of-a-kind drawing, then download it to print, keep, or give away.</p>
+<h1 id="page-title">Once you know a secret, it no longer is one.</h1>
+<p class="intro-copy">This is the kind of paradox I loved thinking about as a kid, like how you can’t seek enlightenment directly; how you’ll never know whether the red <em>you</em> see is the same red I do; how some ideas are forgotten while others are one-way valves, offering perspectives which, once you see them, can’t be unseen. But what if there was a way to share a secret while still keeping it? What if there was a way to entrust someone with your deepest truths without actually being vulnerable with them?</p>
+<p class="intro-copy"><strong>Secret Hashes</strong> offers you the opportunity to do just this. Using the one-way valve of cryptographic hash functions and the power of random walks to encode your secrets, you can share your sacred truths, vulnerability-free.</p>
 <div class="product"><img src="https://raw.githubusercontent.com/shduff/favorite/main/secret-hash/cards.png" alt="Sample Secret Hashes greeting card with an abstract line drawing and kraft-paper envelope"></div>
 <label class="prompt" for="secret">Encase your secret</label>
 <p class="prompt-note">Write something you want to share without revealing. Your words become a cryptographic hash, then a unique scribble. Only you know what it says; your words stay in this browser.</p>
