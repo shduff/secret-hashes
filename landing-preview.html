@@ -66,7 +66,18 @@ textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #9
 .philosophy{border-top:none;padding-top:clamp(25px,4vw,55px)}
 .hero{min-height:0;padding-bottom:0}
 @media(max-width:450px){.entry-row #drawButt{padding:6px 11px}.canvas-footer .download-actions button{padding:6px 8px}}
-.merch-line{margin-top:20px;line-height:1.6}.left{display:flex;flex-direction:column}.product-mosaic{margin:14px 0 10px;width:100%;overflow:hidden}.product-mosaic img{display:block;width:100%;height:auto;object-fit:cover}.merch-line{margin-top:12px}.hero-grid{align-items:stretch}.right{align-self:start}@media(min-width:851px){.left{min-height:100%}.product-mosaic{margin-top:auto;padding-top:16px}} .behind-link{align-self:center;display:inline-flex;align-items:center;gap:10px;margin:clamp(24px,4vh,48px) auto 12px;padding:8px 12px;color:#606761;text-decoration:none;font-size:12px;letter-spacing:.06em;transition:color .15s}.behind-link span{font-size:20px;line-height:1}.behind-link:hover{color:#242827}@media(max-width:850px){.behind-link{margin-top:26px}}</style></head><body>
+.merch-line{margin-top:20px;line-height:1.6}.left{display:flex;flex-direction:column}.product-mosaic{margin:14px 0 10px;width:100%;overflow:hidden}.product-mosaic img{display:block;width:100%;height:auto;object-fit:cover}.merch-line{margin-top:12px}.hero-grid{align-items:stretch}.right{align-self:start}@media(min-width:851px){.left{min-height:100%}.product-mosaic{margin-top:0;padding-top:0}} .behind-link{align-self:center;display:inline-flex;align-items:center;gap:10px;margin:clamp(24px,4vh,48px) auto 12px;padding:8px 12px;color:#606761;text-decoration:none;font-size:12px;letter-spacing:.06em;transition:color .15s}.behind-link span{font-size:20px;line-height:1}.behind-link:hover{color:#242827}@media(max-width:850px){.behind-link{margin-top:26px}}
+/* Keep the scroll invitation in the initial viewport on typical desktop screens. */
+.hero{min-height:100svh;padding-top:clamp(18px,2.5vh,36px);padding-bottom:8px}
+.hero-grid{flex:0 1 auto;align-items:start}
+.left h1{margin-bottom:20px}
+.intro-copy{line-height:1.52;margin-bottom:13px}
+.product-mosaic{margin-top:0!important;padding-top:0!important;margin-bottom:5px}
+.product-mosaic img{max-height:160px;object-fit:contain;object-position:left center}
+.merch-line{margin-top:8px;margin-bottom:0}
+.behind-link{margin-top:auto;margin-bottom:0;padding:8px 12px;flex-shrink:0}
+@media(max-width:850px){.hero{min-height:0}.behind-link{margin-top:20px}.product-mosaic img{max-height:none}}
+</style></head><body>
 <section class="hero" aria-labelledby="page-title">
 <div class="hero-grid">
 <div class="left">
