@@ -115,7 +115,7 @@ textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #9
 .mobile-explanation{display:block}
 .left .philosophy{padding:32px 0 65px}
 }
-</style></head><body>
+.reading .story-quote{margin:8px 0 24px;padding:0 0 0 20px;border-left:2px solid var(--line);font:italic 400 clamp(22px,2.3vw,30px)/1.45 Georgia,serif;color:var(--ink)}.reading h3.process-heading{font:400 clamp(21px,2.1vw,28px)/1.3 Georgia,serif;letter-spacing:-.015em;margin:36px 0 14px}</style></head><body>
 <section class="hero" aria-labelledby="page-title">
 <div class="hero-grid">
 <div class="left">
@@ -129,14 +129,14 @@ textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #9
 <p class="merch-line">Send it on a greeting card. Wear it on a hoodie. Share it with the world.</p>
 <p class="story-link-paragraph"><a class="behind-link" href="#philosophy">Behind the scribble ↓</a></p>
 </div>
-<section id="philosophy" class="philosophy"><article class="reading"><h2>A secret, for example</h2><h3 class="story-title">You are my father.</h3><div class="father-story">
+<section id="philosophy" class="philosophy"><article class="reading"><h2>A secret, for example</h2><blockquote class="story-quote">You are my father.</blockquote><div class="father-story">
 				
 				<div class="father">
 					<p>
 						When I was 20 years old, I found out that the man I’d always called dad wasn’t my biological father. This didn’t change who I saw as my dad, though the secret was hard to process. My parents had gone out of their way to lie to me for two decades. It was a lot. 
 					</p>
 					<p>
-						 then, I’ve learnt my biodad’s name, and I’m not ashamed to share that I regularly google him. He has a whole life, a wife and kids, and he’s a marathon runner—which is strange, because I am too. I don’t want to reconnect with him as a dad, and I definitely don’t want to mess up his current life, but the marathon thing is weird, right?
+						Since then, I’ve learnt my biodad’s name, and I’m not ashamed to share that I google him, regularly. He has a whole life, a wife and kids, and he’s a marathon runner—which is strange, because I am too. I don’t want to reconnect with him as a dad, and I definitely don’t want to mess up his current life, but the marathon thing is weird, right?
 					</p>
 					<p>
 						I’d love to grab a drink with him sometime just to hear his voice, see where my Italian moustache and summer tans come from, find out if there is anything else we have in common. But I’m not quite ready yet. Instead, I’d like to send him an unsigned note of appreciation “from a neighbor,” with a scribble on the front that secretly shares, “You are my father.” 
@@ -146,34 +146,25 @@ textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #9
 
 			<h2>What's this all about?</h2>
 			<p>
-				For a long time, I’d say I made an applied study of performed vulnerability. By narrowing the scope of what I held sacred, I shrank the sphere of things I held secret. And, this meant I grew the sphere of things I was comfortable sharing. In fact, I grew it large enough that I’d often leave “intimate” exchanges unmoved, noticing a vulnerability asymmetry when conversational counterparts would express appreciation for the deep connection they felt we’d shared—an appreciation I couldn’t reciprocate.
+				For a long time, I’d say I made an applied study of performed vulnerability. By narrowing the scope of what I held sacred, I shrank the sphere of things I kept secret and grew the sphere of things I was comfortable sharing. In fact, I grew it large enough that I’d often leave “intimate” exchanges unmoved. There was a vulnerability asymmetry when conversation counterparts would express appreciation for the deep connection they felt we’d shared, an appreciation I didn’t reciprocate.
 			</p>
-			<dl>
-				<dt>Why is my last name different from my family’s?</dt>
-				<dd>Sure, I’ll tell.</dd>
-				
-				
- 			</dl>
-			<p>
-				By narrativizing and then distancing myself from the sharp edges of my own experiences, I was able to share them without really sharing myself. Rather than continuing this practice entirely on the inside and on my own, I’ve decided to externalize and share it in the form of Secret Hashes. I invite you to tell your own secrets through these playful scribbles, sending them to friends and neighbors, family and strangers. And, if you’re interested in the insides of the scribble generating tool, that’s no secret either!			</p>
+			
+			<p>By sharing only once I've narrativized an experience, I distance myself from the sharp edges of my own experiences. It allows me to share stories without really sharing myself, without inviting others into my process of processing.</p>
+<p>Rather than continuing this at least somewhat maladaptive practice on my own, I’ve decided to share it, in the form of Secret Hashes. I invite you to tell your own secrets without telling them, turning them into playful scribbles, sending them to friends and neighbors, family and strangers. And, if you’re interested in the insides of the scribble generating tool, that’s no secret either!</p>
 			<h2>
 				How does it work?
 			</h2>
 			<p>
-				The whole thing is pretty simple. Your greeting card is generated in a four-part process: SECRET -> HASH -> SCRIBBLE -> PRINT + SHARE
+				The whole thing is pretty simple. Your scribble is generated in a four-part process: secret → hash → scribble → print + share
 			</p>
-			<h2>
-				First, you will write and submit your SECRET.
-			</h2>
+			<h3 class="process-heading">First, you will write your secret.</h3>
 			<p>
 				Just as you would in a diary, we invite you to express your secret in your own voice. Try saying it in different ways. Roll it around on your tongue. Listen to how it sounds expressed in different styles. Express it briefly, loudly, directly, in a single utterance. 
 			</p>
 			<p>
-				Your secret stays in your browser. It is hashed locally and never submitted to a server.
+				And don’t worry. Your secret stays in your browser. It is hashed locally and never submitted to a server.
 			</p>
-			<h2>
-				Then, your secret is translated into a HASH.
-			</h2>
+			<h3 class="process-heading">Then, your secret is translated into a hash.</h3>
 				<p>
 					In the real world, hashes are used for verification purposes. For example, when receiving a file, you can compare the hash you get by running the file through a hash function to the hash the sender got by doing the same. If they match, you know that the file was unchanged between when it was sent and received. If the hashes are different, it was tampered with. Email, digital signatures, and many version control services rely on this technology. Secret Hashes does too.
 				</p>
@@ -189,9 +180,7 @@ textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #9
 				<p>
 					In this way, hash functions are able to translate an infinite number of possible inputs (whether a single sentence secret or The Collected Poems of Langston Hughes) into one of many, many possible fixed length hashes (in the case of this project, a string of 154 numbers), one which is always the same and cannot be reverse engineered, meaning your secret cannot be decoded from your hash or from the scribble we draw with it.
 				</p>
-			<h2>
-				Next, your hash is encoded in a SCRIBBLE. 
-			</h2>
+			<h3 class="process-heading">Next, your hash is encoded in a scribble.</h3>
 			<p>
 				This is done by splitting the hash up into its individual digits and interpreting those digits as directions for how to draw a scribble. This part of the translation takes inspiration from Seymour Papert’s LOGO programming language, which allows users to reason in an embodied way about geometry. To understand this part of the encoding process, imagine you are a turtle holding a pen standing on the front of a blank greeting card. Your instructions are to touch the pen to the surface of the greeting card and follow these instructions:
 			</p>
@@ -212,11 +201,9 @@ textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #9
 			<p>
 				Play around with the algorithm to produce different scribbles until you find one you like. 
 			</p>
-			<h2>
-				Now, you’re ready to PRINT your scribble on a greeting card and SHARE YOUR SECRET with the world. 
-			</h2>
+			<h3 class="process-heading">Now, you’re ready to share your secret.</h3>
 			<p>
-				The scribble shown here can be downloaded as a scalable SVG or high-resolution PNG, ready to print as a greeting card. The original secret stays in your browser.		
+				The scribble shown here can be downloaded as a scalable SVG or high-resolution PNG, ready to use in whatever way you’d like.		
 			</p>
 		</article></section>
 </div>
