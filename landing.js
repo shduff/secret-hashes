@@ -79,7 +79,7 @@ draw.addEventListener("click",()=>{
     preview.innerHTML=currentSVG;
     drawText.textContent="redraw";
     svgButton.disabled=pngButton.disabled=false;
-    setStatus("Your secret stays on this device. Redraw for another variation.");
+    setStatus("");
   }catch(err){console.error(err);setStatus("Drawing failed. Please try again.");}
 });
 input.addEventListener("input",()=>{
