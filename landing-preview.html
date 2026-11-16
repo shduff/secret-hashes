@@ -19,7 +19,7 @@ h1{font:400 clamp(50px,6vw,94px)/1.02 Georgia,serif;letter-spacing:-.06em;margin
 textarea{display:block;width:100%;min-height:110px;padding:15px 17px;resize:vertical;background:#fff;border:1px solid #a9aca5;border-radius:0;color:var(--ink)}
 button:focus-visible,a:focus-visible{outline:3px solid #9b82b8;outline-offset:3px}
 textarea:focus{outline:none;border-color:#a9aca5;box-shadow:none}
-textarea:focus-visible{outline:2px solid #777c78;outline-offset:2px}
+textarea:focus-visible{outline:none;outline-offset:0;box-shadow:none}
 textarea:focus:not(:focus-visible){outline:none}
 .actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 0}
 .actions button{border:1px solid var(--ink);background:var(--ink);color:#fff;padding:12px 20px;min-height:46px}
@@ -123,6 +123,9 @@ textarea:focus:not(:focus-visible){outline:none}
 .canvas-footer{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-top:10px}
 .canvas-footer #status{flex:1;min-width:0;min-height:0;margin:0;padding:0;font-size:12px;line-height:1.45;color:#616662}
 .canvas-footer .download-actions{flex:0 0 auto;margin:0}
+
+/* Secret entry has no visual focus treatment, including keyboard focus. */
+#secret:focus,#secret:focus-visible,#secret:active{outline:none!important;outline-offset:0!important;box-shadow:none!important;border-color:#a9aca5!important;appearance:none}
 </style></head><body>
 <section class="hero" aria-labelledby="page-title">
 <div class="hero-grid">
@@ -135,7 +138,7 @@ textarea:focus:not(:focus-visible){outline:none}
 
 <figure class="product-mosaic"><img src="./assets/secret-hashes-products.jpg" alt="Secret Hashes scribble artwork printed on a greeting card, hoodie, tote bag, and mug"></figure>
 <p class="merch-line">Send it on a greeting card. Wear it on a hoodie. Share it with the world.</p>
-<p class="story-link-paragraph"><a class="behind-link" href="#philosophy">Behind the scribble ↓</a></p>
+<p class="story-link-paragraph"><a class="behind-link" href="#philosophy">Behind the scribbles ↓</a></p>
 </div>
 <section id="philosophy" class="philosophy"><article class="reading"><h2>A secret, for example</h2><blockquote class="story-quote">You are my father.</blockquote><div class="father-story">
 				
