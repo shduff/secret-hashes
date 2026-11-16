@@ -1,6 +1,6 @@
 /* Secret Hashes: entirely local SHA3-512 and random-walk rendering. */
 "use strict";
-const WIDTH = 1240, HEIGHT = 874, MASK = (1n << 64n) - 1n;
+const WIDTH = 1240, HEIGHT = 874, PNG_SCALE = 3, MASK = (1n << 64n) - 1n;
 const ROT = [
   [0,36,3,41,18],[1,44,10,45,2],[62,6,43,15,61],
   [28,55,25,21,56],[27,20,39,8,14]
@@ -91,21 +91,11 @@ pngButton.addEventListener("click",()=>{
   const url=URL.createObjectURL(new Blob([currentSVG],{type:"image/svg+xml;charset=utf-8"}));
   const img=new Image();
   img.onload=()=>{
-    const canvas=document.createElement("canvas");canvas.width=WIDTH;canvas.height=HEIGHT;
-    canvas.getContext("2d").drawImage(img,0,0,WIDTH,HEIGHT);
+    const canvas=document.createElement("canvas");canvas.width=WIDTH*PNG_SCALE;canvas.height=HEIGHT*PNG_SCALE;
+    canvas.getContext("2d").drawImage(img,0,0,canvas.width,canvas.height);
     URL.revokeObjectURL(url);
     canvas.toBlob(blob=>{if(blob)download(blob,"secret-hash.png");else setStatus("Could not export PNG.");},"image/png");
   };
   img.onerror=()=>{URL.revokeObjectURL(url);setStatus("Could not export PNG.");};
   img.src=url;
 });
-document.querySelectorAll(".use-case").forEach(card=>card.addEventListener("click",()=>{
-  const wasOpen=card.classList.contains("open");
-  document.querySelectorAll(".use-case").forEach(c=>c.classList.remove("open"));
-  story.replaceChildren();
-  if(!wasOpen){
-    card.classList.add("open");
-    const content=card.querySelector(".story-text");
-    if(content){const clone=content.cloneNode(true);clone.classList.remove("story-text");story.append(clone);}
-  }
-}));
