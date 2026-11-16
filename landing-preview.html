@@ -44,20 +44,30 @@ textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #9
 .intro-copy{font-size:clamp(14px,1.05vw,16px);line-height:1.68;max-width:65ch;margin:0 0 18px}
 .intro-copy strong{font-weight:600}
 @media(max-width:850px){.left h1{font-size:clamp(38px,7vw,55px)}}
+
+.left h1{font-size:clamp(54px,6vw,92px);line-height:1.02;letter-spacing:-.06em;margin:0 0 30px}
+.opening-line{font-size:clamp(18px,1.7vw,23px);line-height:1.4;margin:0 0 20px}
+.opening-line strong{font-weight:600}
+.secret-entry{margin:0 0 30px}
+.secret-entry .prompt{font-size:20px;margin-bottom:10px}
+.secret-entry textarea{min-height:110px}
+.right{align-self:center}
+@media(max-width:850px){.left h1{font-size:clamp(54px,10vw,78px)}.right{align-self:stretch}}
 </style></head><body>
 <section class="hero" aria-labelledby="page-title">
 <div class="hero-grid">
 <div class="left">
-<h1 id="page-title">Once you know a secret, it no longer is one.</h1>
+<h1 id="page-title">Secret Hashes</h1>
+<p class="opening-line"><strong>Once you know a secret, it no longer is one.</strong></p>
 <p class="intro-copy">This is the kind of paradox I loved thinking about as a kid, like how you can’t seek enlightenment directly; how you’ll never know whether the red <em>you</em> see is the same red I do; how some ideas are forgotten while others are one-way valves, offering perspectives which, once you see them, can’t be unseen. But what if there was a way to share a secret while still keeping it? What if there was a way to entrust someone with your deepest truths without actually being vulnerable with them?</p>
-<p class="intro-copy"><strong>Secret Hashes</strong> offers you the opportunity to do just this. Using the one-way valve of cryptographic hash functions and the power of random walks to encode your secrets, you can share your sacred truths, vulnerability-free.</p>
-<div class="product"><img src="https://raw.githubusercontent.com/shduff/favorite/main/secret-hash/cards.png" alt="Sample Secret Hashes greeting card with an abstract line drawing and kraft-paper envelope"></div>
-<label class="prompt" for="secret">Encase your secret</label>
+<p class="intro-copy"><strong>Secret Hashes</strong> offers you the opportunity to do just this. Using the one-way valve of cryptographic hash functions and the power of random walks to encode your secrets, you can share your sacred truths, vulnerability-free. Send it on a greeting card. Wear it on a hoodie. Share it with the world.</p>
+</div>
+<div class="right">
+<div class="secret-entry"><label class="prompt" for="secret">Encase your secret</label>
 <p class="prompt-note">Write something you want to share without revealing. Your words become a cryptographic hash, then a unique scribble. Only you know what it says; your words stay in this browser.</p>
 <textarea id="secret" placeholder="Type your secret here…" spellcheck="false" autocomplete="off"></textarea>
 <div class="actions"><button id="drawButt" type="button"><span id="drawButtText">draw</span></button></div>
 </div>
-<div class="right">
 <div class="canvas-label"><span>Your secret, drawn</span><span>01 / artwork</span></div>
 <div id="scribble" role="img" aria-label="Your generated secret scribble"><div id="no-secret" hidden></div><div id="no-scribble" hidden></div></div>
 <div id="status" role="status" aria-live="polite">Write a secret and press Draw to begin.</div>
