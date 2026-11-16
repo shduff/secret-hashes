@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Secret Hashes — encase your secret</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#242827;--paper:#f8f7f3;--line:#d5d5ce}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 "Be Vietnam Pro",sans-serif}
+button,textarea{font:inherit}button{cursor:pointer}
+.hero{max-width:1380px;margin:auto;min-height:100svh;padding:clamp(24px,4vw,64px);display:flex;flex-direction:column}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,88px);align-items:center;flex:1}
+.left,.right{min-width:0}
+.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#777c78}
+h1{font:400 clamp(50px,6vw,94px)/1.02 Georgia,serif;letter-spacing:-.06em;margin:12px 0 20px}
+.lede{font:400 clamp(19px,2vw,26px)/1.45 Georgia,serif;max-width:570px;margin:0 0 22px}
+.product{width:min(100%,480px);height:clamp(150px,19vw,255px);margin:10px 0 24px;overflow:hidden;display:flex;align-items:center;justify-content:flex-start}
+.product img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 47%}
+.prompt{display:block;font-weight:600;font-size:16px;margin:0 0 8px}
+.prompt-note{font-size:13px;line-height:1.55;color:#616662;margin:0 0 13px;max-width:540px}
+textarea{display:block;width:100%;min-height:110px;padding:15px 17px;resize:vertical;background:#fff;border:1px solid #a9aca5;border-radius:0;color:var(--ink)}
+textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #9b82b8;outline-offset:3px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 0}
+.actions button{border:1px solid var(--ink);background:var(--ink);color:#fff;padding:12px 20px;min-height:46px}
+.actions button.secondary{background:transparent;color:var(--ink)}
+.actions button:disabled{opacity:.35;cursor:not-allowed}
+.canvas-label{display:flex;justify-content:space-between;gap:12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;color:#777c78}
+#scribble{width:100%;aspect-ratio:1240/874;background:#fff;border:1px solid #d9d9d2;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 35px #0000000b;overflow:hidden}
+#scribble svg{display:block;width:100%;height:100%}
+#status{min-height:26px;font-size:12px;color:#616662;margin-top:12px}
+.download-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+.download-actions button{border:1px solid var(--ink);background:transparent;padding:10px 16px;font-size:13px}
+.download-actions button:disabled{opacity:.35;cursor:not-allowed}
+.scroll-cue{align-self:center;color:var(--ink);text-decoration:none;font-size:12px;letter-spacing:.06em;padding:18px 12px 0;display:flex;flex-direction:column;align-items:center;gap:3px}
+.scroll-cue span{font-size:24px;line-height:1}
+.philosophy{border-top:1px solid var(--line);padding:clamp(35px,7vw,90px) 24px 100px}
+.reading{max-width:760px;margin:auto}
+.reading h2{font:400 clamp(29px,3vw,42px)/1.2 Georgia,serif;letter-spacing:-.025em;margin:45px 0 18px}
+.reading h2:first-child{margin-top:0}.reading p,.reading li{max-width:100%}.reading p{margin:0 0 22px}
+.reading dl{margin:24px 0}.reading dt{font-weight:600}.reading dd{font-style:italic;margin:0 0 18px}
+.reading ol{padding-left:24px}.reading .bold{font-weight:600}
+@media(max-width:850px){.hero{min-height:0;padding:24px 20px}.hero-grid{grid-template-columns:1fr;gap:34px}.product{height:190px}.right{padding-bottom:10px}.scroll-cue{margin-top:20px}h1{font-size:60px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head><body>
+<section class="hero" aria-labelledby="page-title">
+<div class="hero-grid">
+<div class="left">
+<div class="eyebrow">An exhibition of things unsaid</div>
+<h1 id="page-title">Secret Hashes</h1>
+<p class="lede">A way to share a secret without saying what it is. Turn your words into a one-of-a-kind drawing, then download it to print, keep, or give away.</p>
+<div class="product"><img src="https://raw.githubusercontent.com/shduff/favorite/main/secret-hash/cards.png" alt="Sample Secret Hashes greeting card with an abstract line drawing and kraft-paper envelope"></div>
+<label class="prompt" for="secret">Encase your secret</label>
+<p class="prompt-note">Write something you want to share without revealing. Your words become a cryptographic hash, then a unique scribble. Only you know what it says; your words stay in this browser.</p>
+<textarea id="secret" placeholder="Type your secret here…" spellcheck="false" autocomplete="off"></textarea>
+<div class="actions"><button id="drawButt" type="button"><span id="drawButtText">draw</span></button></div>
+</div>
+<div class="right">
+<div class="canvas-label"><span>Your secret, drawn</span><span>01 / artwork</span></div>
+<div id="scribble" role="img" aria-label="Your generated secret scribble"><div id="no-secret" hidden></div><div id="no-scribble" hidden></div></div>
+<div id="status" role="status" aria-live="polite">Write a secret and press Draw to begin.</div>
+<div class="download-actions"><button id="download-svg" type="button" disabled>Download SVG</button><button id="download-png" type="button" disabled>Download PNG</button></div>
+</div></div>
+<a class="scroll-cue" href="#philosophy">Scroll for the philosophy (lol)<span aria-hidden="true">↓</span></a>
+</section>
+<section id="philosophy" class="philosophy"><article class="reading"><h2>What's this all about?</h2>
+			<p>
+				For a long time, I’d say I made an applied study of performed vulnerability. By narrowing the scope of what I held sacred, I shrank the sphere of things I held secret. And, this meant I grew the sphere of things I was comfortable sharing. In fact, I grew it large enough that I’d often leave “intimate” exchanges unmoved, noticing a vulnerability asymmetry when conversational counterparts would express appreciation for the deep connection they felt we’d shared—an appreciation I couldn’t reciprocate.
+			</p>
+			<dl>
+				<dt>Why is my last name different from my family’s?</dt>
+				<dd>Sure, I’ll tell.</dd>
+				
+				
+ 			</dl>
+			<p>
+				By narrativizing and then distancing myself from the sharp edges of my own experiences, I was able to share them without really sharing myself. Rather than continuing this practice entirely on the inside and on my own, I’ve decided to externalize and share it in the form of Secret Hashes. I invite you to tell your own secrets through these playful scribbles, sending them to friends and neighbors, family and strangers. And, if you’re interested in the insides of the scribble generating tool, that’s no secret either!			</p>
+			<h2>
+				How does it work?
+			</h2>
+			<p>
+				The whole thing is pretty simple. Your greeting card is generated in a four-part process: SECRET -> HASH -> SCRIBBLE -> PRINT + SHARE
+			</p>
+			<h2>
+				First, you will write and submit your SECRET.
+			</h2>
+			<p>
+				Just as you would in a diary, we invite you to express your secret in your own voice. Try saying it in different ways. Roll it around on your tongue. Listen to how it sounds expressed in different styles. Express it briefly, loudly, directly, in a single utterance. 
+			</p>
+			<p>
+				Your secret stays in your browser. It is hashed locally and never submitted to a server.
+			</p>
+			<h2>
+				Then, your secret is translated into a HASH.
+			</h2>
+				<p>
+					In the real world, hashes are used for verification purposes. For example, when receiving a file, you can compare the hash you get by running the file through a hash function to the hash the sender got by doing the same. If they match, you know that the file was unchanged between when it was sent and received. If the hashes are different, it was tampered with. Email, digital signatures, and many version control services rely on this technology. Secret Hashes does too.
+				</p>
+				<p>
+					A hash is the name for a string of characters output by a hash function. A hash function is the tool we use on the text of your original secret to encode it, unrecognizably. The exact recipes used to generate hashes are complex, but they have a few important characteristics.
+				</p>
+				<ol>
+					<li><span class="bold">They are deterministic.</span><br />The same input text will always result in the same hash.</li>
+					<li><span class="bold">They are pre-image resistant.</span><br />The original text cannot be recovered from the hash.</li>
+					<li><span class="bold">They are collision resistant.</span><br />Different inputs will not result in the same hash—or, at least, they are vanishingly unlikely to do so.</li>
+					<li><span class="bold">They use the avalanche effect.</span><br />Even a tiny change in the original text will generate a completely different hash due to the “rolling snowball”-like structure of the hash function.</li>
+				</ol>
+				<p>
+					In this way, hash functions are able to translate an infinite number of possible inputs (whether a single sentence secret or The Collected Poems of Langston Hughes) into one of many, many possible fixed length hashes (in the case of this project, a string of 154 numbers), one which is always the same and cannot be reverse engineered, meaning your secret cannot be decoded from your hash or from the scribble we draw with it.
+				</p>
+			<h2>
+				Next, your hash is encoded in a SCRIBBLE. 
+			</h2>
+			<p>
+				This is done by splitting the hash up into its individual digits and interpreting those digits as directions for how to draw a scribble. This part of the translation takes inspiration from Seymour Papert’s LOGO programming language, which allows users to reason in an embodied way about geometry. To understand this part of the encoding process, imagine you are a turtle holding a pen standing on the front of a blank greeting card. Your instructions are to touch the pen to the surface of the greeting card and follow these instructions:
+			</p>
+			<ol>
+				<li>
+					Look at the first digit in your hash, and walk forward that many steps. Then turn a random amount.
+				</li>
+				<li>
+					Look at the second digit in your hash, and walk forward that many steps. Then turn a random amount.
+				</li>
+				<li>
+					Look at the third digit in your hash, and walk forward that many steps—and on and on until you reach the last digit in your hash.
+				</li>
+			</ol>
+			<p>
+				In this way, you draw a scribble which could, in theory, be decoded back into your hash (though remember that your hash cannot be decoded back into your secret), however the same hash can produce an infinite number of scribbles due to all the random turns. This isn’t for the security of your secret, but instead for aesthetics. 
+			</p>
+			<p>
+				Play around with the algorithm to produce different scribbles until you find one you like. 
+			</p>
+			<h2>
+				Now, you’re ready to PRINT your scribble on a greeting card and SHARE YOUR SECRET with the world. 
+			</h2>
+			<p>
+				The scribble shown here can be downloaded as a scalable SVG or high-resolution PNG, ready to print as a greeting card. The original secret stays in your browser.		
+			</p>
+		</article></section>
+<script src="./landing.js"></script></body></html>
