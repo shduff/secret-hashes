@@ -8,7 +8,7 @@ This project is a standalone continuation of [the original Secret Hashes project
 
 ## Use
 
-Open the site, type a secret, and click **draw**. Click **redraw** for another visual variation of the same secret. Download the displayed image as SVG or PNG. The drawing uses a 1240 × 874 landscape canvas; SVG scales without loss.
+Open the site, type a secret, and click **draw**. Click **redraw** for another visual variation of the same secret. Download the displayed image as SVG or PNG. The drawing uses a 1240 × 874 landscape canvas, and PNG downloads export at 3720 × 2622 pixels (3× resolution). SVG scales without loss.
 
 ## Privacy
 
