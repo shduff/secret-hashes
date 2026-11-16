@@ -303,7 +303,7 @@ main p,main li,main dd,main dl,main ol{max-width:100%}
 #use-cases,#story-div{width:100%;max-width:100%}
 #story-div{height:330px}
 @media(max-width:650px){#container{padding:22px 18px;gap:26px}.site-intro h1{font-size:54px}#container #studio{padding:0 0 20px}#studio #scribble{width:min(100%,300px)}}
-</style>
+.example-heading{font-family:Georgia,serif;font-size:clamp(24px,3vw,34px);font-weight:400;margin:22px 0 0}#story-div{height:auto;max-height:none;overflow:visible;border:0;background:transparent;padding:0;margin:16px 0 48px} </style>
 </head>
 <body>
 	<div id="container"><section class="site-intro"><div class="intro-label">AN EXHIBITION OF THINGS UNSAID</div><h1>Secret Hashes</h1><p>Turn something you can’t quite say into something you can share. Write a secret, transform it into a one-of-a-kind scribble, and download the artwork to print or keep.</p></section>
@@ -319,63 +319,8 @@ main p,main li,main dd,main dl,main ol{max-width:100%}
 			<p>
 				Here are some secrets I’d like to share using Secret Hashes in my own life.
 			</p>
-			<div id="use-cases" role="tablist" aria-label="Sample secrets">
-				<div class="use-case open">
-					<summary id="father">
-						You are my father.
-					</summary>
-					<div class="story-text father">
-						<p>
-							When I was 20 years old, I found out that the man I’d always called dad wasn’t my biological father. This didn’t change who I saw as my dad, though the secret was hard to process. My parents had gone out of their way to lie to me for two decades. It was a lot. 
-						</p>
-						<p>
-							 then, I’ve learnt my biodad’s name, and I’m not ashamed to share that I regularly google him. He has a whole life, a wife and kids, and he’s a marathon runner—which is strange, because I am too. I don’t want to reconnect with him as a dad, and I definitely don’t want to mess up his current life, but the marathon thing is weird, right?
-						</p>
-						<p>
-							I’d love to grab a drink with him sometime just to hear his voice, see where my Italian moustache and summer tans come from, find out if there is anything else we have in common. But I’m not quite ready yet. Instead, I’d like to send him an unsigned note of appreciation “from a neighbor,” with a scribble on the front that secretly shares, “You are my father.” 
-						</p>
-					</div>
-				</div>
-				<div class="use-case">
-					<summary id="forgive">
-						I didn't forgive you then, but I forgive you now.
-					</summary>
-					<div class="story-text forgive">
-						<p>
-							I moved around as a kid before my family settled in New Hampshire. Every license plate read, “Live free or die!” I thought Fox News was real news. I didn’t feel comfortable being, or even exploring, who I was. I looked at the lives being lived around me—especially those of the adults close to me—and had a deep sense that growing up meant accepting a sad, repressive fate. I couldn’t imagine growing up to be happy and that left me unskilled and unambitious when it came to imagining my future.
-						</p>
-						<p>
-							This hopeless posture came from many places, and it was no one person’s fault, but there were specific people in my young life who went out of their way to make me feel I was not whole. They told me to take up less space. They told me I wasn’t trying hard enough. They told me, in no uncertain terms, how I needed to change to be loved by God, family, friends, and neighbors. 
-						</p>
-						<p>
-							At the time, I just absorbed what they said and tried to fit myself into the mold they presented. I tried—and failed—so hard. Shortly after leaving home, however, I saw the ways they had hurt me, and I felt angry. Angry that they would treat a young person that way. That they would clip the wings of a bird trying to fly. I felt angry that I’d spent so many years unhappy. It’s only recently that I’ve metabolized the truism, “Hurt people hurt people.”
-						</p>
-						<p>
-							I haven’t talked to many of these people in a long time, especially since my parents moved out of New Hampshire. I don’t have it in me to return to those relationships with real vulnerability, but the idea of reconnecting with these folks—sending a loving note, maybe hearing their voice and learning about their lives—feels welcome. We can’t change the past, but we can move forward. On the front of these cards, a scribble will say without saying, “I didn’t forgive you then, but I forgive you now.” 
-						</p>
-					</div>
-				</div>
-				<div class="use-case">
-					<summary id="enby">
-						I'm nonbinary!
-					</summary>
-					<div class="story-text enby">
-						<p>
-							Sometimes you don’t keep a thing secret, but it still is one. “Coming out” is only a thing because we assume a person is cis, straight, able-bodied, etc. unless we are explicitly told otherwise. We can even project these same assumptions onto ourselves.
-						</p>
-						<p>
-							When I realized I was bi, I didn’t feel the need to “come out.” Sexual orientation doesn’t come up much in my life, so I just dated people I loved, and my behavior spoke for itself—or it didn’t. For me, it didn’t matter much what people assumed about this aspect of my identity. 
-						</p>
-						<p>
-							Since I realized I was nonbinary, however, I’ve wanted to come out to the people in my life who have known me as a “woman.” As I’ve worked through that, I’ve  realized I’ll be in a perpetual state of coming out for the rest of my life, because we gender people automatically, placing them almost exclusively into the gender binary. I will never be able to “pass” as nonbinary.
-						</p>
-						<p>
-							This realization really chafes with my desire to avoid vulnerability (see above), so this is a large quantity card order. On each, the scribble reads, “I’m nonbinary!” and sending the card to a loved one offers me a real—if arbitrary—moment to let them know what the scribble says.
-						</p>
-					</div>
-				</div>
-			</div>
-			<div id="story-div" role="tabpanel" tabindex="0">
+			<h3 class="example-heading">You are my father.</h3>
+<div id="story-div" role="tabpanel" tabindex="0">
 				<!-- This should eventually be empty to start with "father" content loaded programmatically. Hard coding for now. -->
 				<div class="father">
 					<p>
@@ -397,10 +342,8 @@ main p,main li,main dd,main dl,main ol{max-width:100%}
 			<dl>
 				<dt>Why is my last name different from my family’s?</dt>
 				<dd>Sure, I’ll tell.</dd>
-				<dt>How did growing up in a small, conservative town mess me up?</dt>
-				<dd>Let me count the ways.</dd>
-				<dt>What body image issues consumed me through my teens and twenties?</dt>
-				<dd>It was a dark time. You sitting down?</dd>
+				
+				
  			</dl>
 			<p>
 				By narrativizing and then distancing myself from the sharp edges of my own experiences, I was able to share them without really sharing myself. Rather than continuing this practice entirely on the inside and on my own, I’ve decided to externalize and share it in the form of Secret Hashes. I invite you to tell your own secrets through these playful scribbles, sending them to friends and neighbors, family and strangers. And, if you’re interested in the insides of the scribble generating tool, that’s no secret either!			</p>
