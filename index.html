@@ -1,306 +1,153 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;500&display=swap" rel="stylesheet">
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Secret Hashes — encase your secret</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#242827;--paper:#f8f7f3;--line:#d5d5ce}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 "Be Vietnam Pro",sans-serif}
+button,textarea{font:inherit}button{cursor:pointer}
+.hero{max-width:1380px;margin:auto;min-height:100svh;padding:clamp(24px,4vw,64px);display:flex;flex-direction:column}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,88px);align-items:center;flex:1}
+.left,.right{min-width:0}
+.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#777c78}
+h1{font:400 clamp(50px,6vw,94px)/1.02 Georgia,serif;letter-spacing:-.06em;margin:12px 0 20px}
+.lede{font:400 clamp(19px,2vw,26px)/1.45 Georgia,serif;max-width:570px;margin:0 0 22px}
+.product{width:min(100%,480px);height:clamp(150px,19vw,255px);margin:10px 0 24px;overflow:hidden;display:flex;align-items:center;justify-content:flex-start}
+.product img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 47%}
+.prompt{display:block;font-weight:600;font-size:16px;margin:0 0 8px}
+.prompt-note{font-size:13px;line-height:1.55;color:#616662;margin:0 0 13px;max-width:540px}
+textarea{display:block;width:100%;min-height:110px;padding:15px 17px;resize:vertical;background:#fff;border:1px solid #a9aca5;border-radius:0;color:var(--ink)}
+button:focus-visible,a:focus-visible{outline:3px solid #9b82b8;outline-offset:3px}
+textarea:focus{outline:none;border-color:#a9aca5;box-shadow:none}
+textarea:focus-visible{outline:none;outline-offset:0;box-shadow:none}
+textarea:focus:not(:focus-visible){outline:none}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 0}
+.actions button{border:1px solid var(--ink);background:var(--ink);color:#fff;padding:12px 20px;min-height:46px}
+.actions button.secondary{background:transparent;color:var(--ink)}
+.actions button:disabled{opacity:.35;cursor:not-allowed}
+.canvas-label{display:flex;justify-content:space-between;gap:12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;color:#777c78}
+#scribble{width:100%;aspect-ratio:1240/874;background:#fff;border:1px solid #d9d9d2;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 35px #0000000b;overflow:hidden}
+#scribble svg{display:block;width:100%;height:100%}
+#status{min-height:26px;font-size:12px;color:#616662;margin-top:12px}
+.download-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+.download-actions button{border:1px solid var(--ink);background:transparent;padding:10px 16px;font-size:13px}
+.download-actions button:disabled{opacity:.35;cursor:not-allowed}
+.scroll-cue{align-self:center;color:var(--ink);text-decoration:none;font-size:12px;letter-spacing:.06em;padding:18px 12px 0;display:flex;flex-direction:column;align-items:center;gap:3px}
+.scroll-cue span{font-size:24px;line-height:1}
+.philosophy{border-top:1px solid var(--line);padding:clamp(35px,7vw,90px) 24px 100px}
+.reading{max-width:760px;margin:auto}
+.reading h2{font:400 clamp(29px,3vw,42px)/1.2 Georgia,serif;letter-spacing:-.025em;margin:45px 0 18px}
+.reading h2:first-child{margin-top:0}.reading p,.reading li{max-width:100%}.reading p{margin:0 0 22px}
+.reading dl{margin:24px 0}.reading dt{font-weight:600}.reading dd{font-style:italic;margin:0 0 18px}
+.reading ol{padding-left:24px}.reading .bold{font-weight:600}
+@media(max-width:850px){.hero{min-height:0;padding:24px 20px}.hero-grid{grid-template-columns:1fr;gap:34px}.product{height:190px}.right{padding-bottom:10px}.scroll-cue{margin-top:20px}h1{font-size:60px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.story-title{font:italic 400 24px Georgia,serif;margin:0 0 20px}.father-story{margin-bottom:52px}/* The original opening essay now anchors the landing page. */
+.left h1{font-size:clamp(36px,4vw,61px);line-height:1.12;letter-spacing:-.045em;margin:0 0 24px}
+.intro-copy{font-size:clamp(14px,1.05vw,16px);line-height:1.68;max-width:65ch;margin:0 0 18px}
+.intro-copy strong{font-weight:600}
+@media(max-width:850px){.left h1{font-size:clamp(38px,7vw,55px)}}
 
-	<title>Secret Hashes — share a secret without revealing it</title>
-	<style>
-		body {
-			--gap: 16px;
-            /*colors from the powderhouse site*/
-            --off-black: rgb(42 46 47); /* #2A2E2F */
-            --off-white: rgb(245 243 239); /* #F5F3EF */
-            --purple: rgb(178 131 200); /* #B283C8 */
-            --yellow: rgb(255 200 93); /* #FFC85D */
-            --green: rgb(50 131 90); /* #32835A */
-            --blue: rgb(128 210 236); /* #80D2EC */
-            --red: rgb(226 87 87); /* #E25757 */
-
-            font-family: "Be Vietnam Pro", sans-serif;
-            font-size: 22px;
-            font-weight: 300;
-            background-color: var(--off-black);
-			border-color: var(--off-black);
-            color: var(--off-black);
-            margin: 0;
-            box-sizing: border-box;
-		}
-		h1, h2 {
-			font-weight: 500;
-		}
-		h1 {
-			margin-top: 0;
-		}
-		li:not(:last-child) {
-			padding-bottom: calc(var(--gap) / 2);
-		}
-		img {
-			width: 100%;
-		}
-		#container {
-			display: flex;
-			padding: var(--gap);
-		}
-		#container > * {
-			background-color: var(--off-white);
-		}
-		main {
-			width: 100%;
-			margin-right: var(--gap);
-			flex: 3;
-			padding: var(--gap);
-		}
-		/*details {
-			padding-bottom: calc(var(--gap) / 2);
-		}*/
-		.story-text {
-			display: none;
-		}
-		#story-div {
-			font-size: 1rem;
-			font-weight: 500;
-			margin: 0 var(--gap);
-			padding-bottom: var(--gap);
-		}
-		.use-case:not(:last-child) {
-			margin-right: var(--gap);
-		}
-		#use-cases {
-			display: flex;
-			margin-bottom: var(--gap);
-		}
-		#use-cases > * {
-			flex: 1;
-		}
-		summary {
-			cursor: pointer;
-			height: 200px;
-			background-color: white;
-			background-size: contain;
-			background-repeat: no-repeat;
-			background-position: center bottom -20px;
-			padding: calc(var(--gap) / 2) var(--gap);
-			margin: 0;
-		}
-		summary#father {
-			background-image: url("assets/father.svg");
-		}
-		summary#forgive {
-			background-image: url("assets/forgive.svg");
-		}
-		summary#enby {
-			background-image: url("assets/enby.svg");
-		}
-		dt {
-			font-weight: 500;
-			padding-bottom: calc(var(--gap) / 2);
-		}
-		dd {
-			margin-left: calc(var(--gap) / 2);
-			padding-bottom: var(--gap);
-			font-style: italic;
-		}
-		dd:last-child {
-			padding-bottom: 0;
-		}
-		p:first-child {
-			margin-top: 0;
-		}
-		span.highlight {
-			/*font-size: 2rem;*/
-			font-weight: 500;
-		}
-		aside {
-			position: sticky;
-			top: var(--gap);
-			max-height: calc(100vh - 4 * var(--gap));
-			flex: 2;
-			padding: var(--gap);
-
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: space-around;
-		}
-		aside #secret {
-			width: 80%;
-		}
-		aside #drawButt {
-			display: grid;
-			grid-template-columns: 1fr;
-			justify-content: center;
-			align-items: center;
-		}
-		aside #drawButt > * {
-			grid-row-start: 1;
-			grid-column-start: 1;
-		}
-		aside #scribble {
-			width: calc(1748px / 4);
-			height: calc(2480px / 4);
-			background-color: white;
-			border: solid 1px var(--off-black);
-			background-size: cover;
-
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-		aside .scribble-inputs {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		}
-		aside input, aside button {
-			font-size: 1.5rem;
-			color: var(--off-black);
-			height: 2rem;
-			margin: 0 calc(var(--gap) / 2);
-			padding: 0 calc(var(--gap) / 2);
-			border-radius: 5px;
-		}
-		aside button {
-			height: 100%;
-			color: var(--red);
-			background-color: var(--off-white);
-			margin-left: var(--gap);
-		}
-		aside #radios {
-			display: flex;
-			align-items: center;
-		}
-		.invisible {
-			display: none;
-		}
-		.open {
-			border: solid 1px var(--off-black);
-		}
-		.bold {
-			font-weight: 500;
-		}
-		.italic {
-			font-style: italic;
-		}
-	@media(max-width:900px){#container{flex-direction:column}main{margin-right:0}aside{position:static;max-height:none;gap:16px}aside #scribble{width:min(100%,437px);height:auto;aspect-ratio:1748/2480}#use-cases{flex-direction:column;gap:12px}.use-case{margin-right:0!important}aside .scribble-inputs{flex-wrap:wrap;justify-content:center;gap:8px}aside input,aside button{font-size:1rem;height:auto;min-height:44px}} #scribble svg{display:block;width:100%;height:100%}button:disabled{opacity:.4;cursor:not-allowed}button{cursor:pointer}#status{font-size:.7rem;text-align:center}aside #scribble{overflow:hidden} 
-/* A light touch: crisp, slightly retro editorial layout. */
-:root { color-scheme: light; }
-*, *::before, *::after { box-sizing: border-box; }
-body { --gap: 20px; font-size: 18px; line-height: 1.55; }
-#container { max-width: 1520px; margin: 0 auto; align-items: flex-start; gap: var(--gap); padding: var(--gap); }
-main { min-width: 0; margin-right: 0; padding: clamp(22px,3.5vw,54px); border: 1px solid rgba(42,46,47,.2); }
-main > h1 { font-size: clamp(2.15rem,4vw,3.6rem); line-height: 1.13; letter-spacing: -.045em; margin-bottom: .8em; }
-main > h2 { font-size: clamp(1.3rem,2vw,1.75rem); line-height: 1.25; letter-spacing: -.02em; margin-top: 2.1em; }
-main p, main li, main dd { max-width: 74ch; }
-main p { margin-block: 0 1.2em; }
-main img { display: block; height: auto; margin: 30px auto; border: 1px solid rgba(42,46,47,.12); }
-#use-cases { gap: 12px; }
-.use-case { margin-right: 0 !important; min-width: 0; border: 1px solid rgba(42,46,47,.3); background: #fff; transition: border-color .15s, transform .15s; }
-.use-case:hover, .use-case.open { border-color: var(--red); }
-summary { min-height: 190px; height: auto; padding: 16px; line-height: 1.25; background-position: center bottom 0; background-size: 90% auto; }
-#story-div { margin: 18px 0 28px; font-size: .95rem; line-height: 1.6; }
-aside { min-width: 0; top: var(--gap); padding: 24px 16px; gap: 16px; max-height: none; border: 1px solid rgba(42,46,47,.2); }
-aside .scribble-inputs { width: 100%; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-aside #secret { flex: 1 1 190px; width: auto; min-width: 0; }
-aside input, aside button { font-family: inherit; font-size: .85rem; line-height: 1.25; margin: 0; padding: 10px 12px; height: auto; min-height: 44px; border: 1px solid var(--off-black); border-radius: 2px; }
-aside button { background: var(--off-black); color: var(--off-white); transition: background .15s, color .15s; }
-aside button:not(:disabled):hover { background: var(--red); color: white; }
-aside button:focus-visible, aside input:focus-visible, summary:focus-visible { outline: 3px solid var(--purple); outline-offset: 3px; }
-aside button:disabled { opacity: .4; cursor: not-allowed; }
-aside #drawButt { display: inline-flex; align-items: center; justify-content: center; min-width: 92px; }
-aside #scribble { width: min(100%, 437px); height: auto; aspect-ratio: 1748/2480; overflow: hidden; flex: none; }
-aside #scribble svg { display: block; width: 100%; height: 100%; }
-#status { color: #52585a; font-size: .7rem; text-align: center; max-width: 40ch; }
-@media (max-width: 900px) {
-  #container { flex-direction: column; padding: 12px; gap: 12px; }
-  main { order: 2; width: 100%; padding: clamp(20px,5vw,38px); }
-  aside { order: 1; position: static; width: 100%; padding: 16px; }
-  aside #scribble { width: min(100%, 320px); }
-  #use-cases { flex-direction: column; }
-  summary { min-height: 130px; }
+.left h1{font-size:clamp(54px,6vw,92px);line-height:1.02;letter-spacing:-.06em;margin:0 0 30px}
+.opening-line{font-size:clamp(18px,1.7vw,23px);line-height:1.4;margin:0 0 20px}
+.opening-line strong{font-weight:600}
+.secret-entry{margin:0 0 30px}
+.secret-entry .prompt{font-size:20px;margin-bottom:10px}
+.secret-entry textarea{min-height:110px}
+.right{align-self:center}
+@media(max-width:850px){.left h1{font-size:clamp(54px,10vw,78px)}.right{align-self:stretch}}
+.hero-grid{align-items:start}.left,.right{align-self:start}.left h1{margin-top:0}.right{padding-top:clamp(90px,8vw,121px)}.secret-entry{margin-bottom:20px}.secret-entry .prompt{font-size:clamp(18px,1.7vw,23px);line-height:1.4;font-weight:600;margin:0 0 20px}.secret-entry .prompt-note{margin:0 0 12px}.secret-entry textarea{min-height:62px;height:62px;padding:13px 15px}.control-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px}.control-row .actions,.control-row .download-actions{margin:0}.control-row .download-actions{justify-content:flex-end}.control-row .download-actions button{border-color:#b7bab4;color:#545b56;min-height:46px}#scribble{box-shadow:none}.canvas-label{justify-content:flex-end;margin:8px 0 0;text-transform:none;letter-spacing:.03em;font-size:12px}#status{margin-top:5px;min-height:20px}@media(max-width:850px){.right{padding-top:0}.hero-grid{gap:26px}}@media(max-width:480px){.control-row .download-actions{gap:5px}.control-row .download-actions button{padding:8px;font-size:12px}}.entry-row{display:flex;align-items:stretch;gap:10px}.entry-row textarea{flex:1;min-width:0;margin:0;min-height:62px;height:62px}.entry-row #drawButt{flex:0 0 auto;min-width:86px;padding:10px 18px;background:var(--ink);color:white;border:1px solid var(--ink)}.canvas-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px}.canvas-footer .canvas-label{margin:0;display:block;text-align:left;white-space:nowrap}.canvas-footer .download-actions{margin:0;display:flex;justify-content:flex-end;gap:8px}.canvas-footer .download-actions button{border-color:#b7bab4;color:#545b56;min-height:40px}@media(max-width:450px){.entry-row{gap:7px}.entry-row #drawButt{min-width:68px;padding:8px 11px}.canvas-footer{flex-wrap:wrap}.canvas-footer .download-actions{margin-left:auto}}
+/* Compact controls and seamless transition into the essay. */
+.entry-row textarea,.entry-row #drawButt,.canvas-footer .download-actions button{height:38px;min-height:38px;max-height:38px;box-sizing:border-box}
+.entry-row textarea{padding:7px 11px;resize:none;line-height:22px}
+.entry-row #drawButt{padding:6px 17px;line-height:24px}
+.canvas-footer{align-items:flex-start;margin-top:10px}
+.canvas-footer .canvas-label{align-self:flex-start;line-height:38px;padding:0}
+.canvas-footer .download-actions{align-items:flex-start}
+.canvas-footer .download-actions button{padding:6px 12px;line-height:24px}
+.secret-entry .prompt{margin-bottom:12px}
+.philosophy{border-top:none;padding-top:clamp(25px,4vw,55px)}
+.hero{min-height:0;padding-bottom:0}
+@media(max-width:450px){.entry-row #drawButt{padding:6px 11px}.canvas-footer .download-actions button{padding:6px 8px}}
+.merch-line{margin-top:20px;line-height:1.6}.left{display:flex;flex-direction:column}.product-mosaic{margin:14px 0 10px;width:100%;overflow:hidden}.product-mosaic img{display:block;width:100%;height:auto;object-fit:cover}.merch-line{margin-top:12px}.hero-grid{align-items:stretch}.right{align-self:start}@media(min-width:851px){.left{min-height:100%}.product-mosaic{margin-top:0;padding-top:0}} .behind-link{align-self:center;display:inline-flex;align-items:center;gap:10px;margin:clamp(24px,4vh,48px) auto 12px;padding:8px 12px;color:#606761;text-decoration:none;font-size:12px;letter-spacing:.06em;transition:color .15s}.behind-link span{font-size:20px;line-height:1}.behind-link:hover{color:#242827}@media(max-width:850px){.behind-link{margin-top:26px}}
+/* Restore the original reading rhythm and full-size product mosaic. */
+.hero{min-height:100svh}
+.intro-copy{line-height:1.68;margin-bottom:18px}
+.product-mosaic{margin:0 0 18px!important;padding:0!important}
+.product-mosaic img{width:100%;max-height:none;height:auto;object-fit:cover}
+.merch-line{margin-top:0;margin-bottom:18px}
+.behind-link{margin-top:auto;margin-bottom:0;padding:8px 12px;flex-shrink:0}
+@media(max-width:850px){.hero{min-height:0}.behind-link{margin-top:20px}}
+.canvas-footer{justify-content:flex-end}.right .behind-link{display:flex;width:max-content;margin:16px auto 0;padding:5px 10px;align-self:center}.hero{min-height:0}.hero-grid{align-items:start}@media(max-width:850px){.right .behind-link{margin:16px auto 0}}
+/* Editorial narrative on desktop; title, tool, then story on mobile. */
+.left{display:block}
+.left-story{display:flex;flex-direction:column}
+.secret-entry .intro-copy{font-size:clamp(14px,1.05vw,16px);line-height:1.68;margin:0 0 18px}
+.story-link-paragraph{margin:16px 0 0}
+.story-link-paragraph .behind-link{display:inline-flex;width:auto;margin:0;padding:0;align-items:center;gap:9px;text-decoration:none;color:#606761;font-size:12px;letter-spacing:.06em}
+.story-link-paragraph .behind-link:hover{color:#242827}
+@media(max-width:850px){
+.hero-grid{display:flex;flex-direction:column;gap:0}
+.left{display:contents}
+.intro-heading{order:1;width:100%}
+.right{order:2;width:100%;padding-top:18px;padding-bottom:22px}
+.left-story{order:3;width:100%}
+.left-story .product-mosaic{margin-top:0!important}
 }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
-</style>
-</head>
-<body>
-	<div id="container">
-		<main>
-			<h1>Once you know a secret, <br /> it no longer is one. </h1>
-			<p>
-				This is the kind of paradox I loved thinking about as a kid, like how you can’t seek enlightenment directly; how you’ll never know whether the red *you* see is the same red I do; how some ideas are forgotten while others are one-way valves, offering perspectives which, once you see them, can’t be unseen. But what if there was a way to share a secret while still keeping it? What if there was a way to entrust someone with your deepest truths without actually being vulnerable with them?
-			</p>
-			<p>
-				<span class="highlight">Secret Hashes</span> offers you the opportunity to do just this. Using the one-way valve of cryptographic hash functions and the power of random walks to encode your secrets, you can share your sacred truths with anyone in the form of a sleek, graphical greeting card—vulnerability-free. 
-			</p>
-			<img src="https://raw.githubusercontent.com/shduff/favorite/main/secret-hash/cards.png">
-			<p>
-				Here are some secrets I’d like to share using Secret Hashes in my own life.
-			</p>
-			<div id="use-cases">
-				<div class="use-case open">
-					<summary id="father">
-						You are my father.
-					</summary>
-					<div class="story-text father">
-						<p>
-							When I was 20 years old, I found out that the man I’d always called dad wasn’t my biological father. This didn’t change who I saw as my dad, though the secret was hard to process. My parents had gone out of their way to lie to me for two decades. It was a lot. 
-						</p>
-						<p>
-							 then, I’ve learnt my biodad’s name, and I’m not ashamed to share that I regularly google him. He has a whole life, a wife and kids, and he’s a marathon runner—which is strange, because I am too. I don’t want to reconnect with him as a dad, and I definitely don’t want to mess up his current life, but the marathon thing is weird, right?
-						</p>
-						<p>
-							I’d love to grab a drink with him sometime just to hear his voice, see where my Italian moustache and summer tans come from, find out if there is anything else we have in common. But I’m not quite ready yet. Instead, I’d like to send him an unsigned note of appreciation “from a neighbor,” with a scribble on the front that secretly shares, “You are my father.” 
-						</p>
-					</div>
-				</div>
-				<div class="use-case">
-					<summary id="forgive">
-						I didn't forgive you then, but I forgive you now.
-					</summary>
-					<div class="story-text forgive">
-						<p>
-							I moved around as a kid before my family settled in New Hampshire. Every license plate read, “Live free or die!” I thought Fox News was real news. I didn’t feel comfortable being, or even exploring, who I was. I looked at the lives being lived around me—especially those of the adults close to me—and had a deep sense that growing up meant accepting a sad, repressive fate. I couldn’t imagine growing up to be happy and that left me unskilled and unambitious when it came to imagining my future.
-						</p>
-						<p>
-							This hopeless posture came from many places, and it was no one person’s fault, but there were specific people in my young life who went out of their way to make me feel I was not whole. They told me to take up less space. They told me I wasn’t trying hard enough. They told me, in no uncertain terms, how I needed to change to be loved by God, family, friends, and neighbors. 
-						</p>
-						<p>
-							At the time, I just absorbed what they said and tried to fit myself into the mold they presented. I tried—and failed—so hard. Shortly after leaving home, however, I saw the ways they had hurt me, and I felt angry. Angry that they would treat a young person that way. That they would clip the wings of a bird trying to fly. I felt angry that I’d spent so many years unhappy. It’s only recently that I’ve metabolized the truism, “Hurt people hurt people.”
-						</p>
-						<p>
-							I haven’t talked to many of these people in a long time, especially since my parents moved out of New Hampshire. I don’t have it in me to return to those relationships with real vulnerability, but the idea of reconnecting with these folks—sending a loving note, maybe hearing their voice and learning about their lives—feels welcome. We can’t change the past, but we can move forward. On the front of these cards, a scribble will say without saying, “I didn’t forgive you then, but I forgive you now.” 
-						</p>
-					</div>
-				</div>
-				<div class="use-case">
-					<summary id="enby">
-						I'm nonbinary!
-					</summary>
-					<div class="story-text enby">
-						<p>
-							Sometimes you don’t keep a thing secret, but it still is one. “Coming out” is only a thing because we assume a person is cis, straight, able-bodied, etc. unless we are explicitly told otherwise. We can even project these same assumptions onto ourselves.
-						</p>
-						<p>
-							When I realized I was bi, I didn’t feel the need to “come out.” Sexual orientation doesn’t come up much in my life, so I just dated people I loved, and my behavior spoke for itself—or it didn’t. For me, it didn’t matter much what people assumed about this aspect of my identity. 
-						</p>
-						<p>
-							Since I realized I was nonbinary, however, I’ve wanted to come out to the people in my life who have known me as a “woman.” As I’ve worked through that, I’ve  realized I’ll be in a perpetual state of coming out for the rest of my life, because we gender people automatically, placing them almost exclusively into the gender binary. I will never be able to “pass” as nonbinary.
-						</p>
-						<p>
-							This realization really chafes with my desire to avoid vulnerability (see above), so this is a large quantity card order. On each, the scribble reads, “I’m nonbinary!” and sending the card to a loved one offers me a real—if arbitrary—moment to let them know what the scribble says.
-						</p>
-					</div>
-				</div>
-			</div>
-			<div id="story-div">
-				<!-- This should eventually be empty to start with "father" content loaded programmatically. Hard coding for now. -->
+
+/* Keep the studio visible as the reader scrolls the left-hand essay. */
+.mobile-explanation{display:none}
+@media(min-width:851px){
+.hero{max-width:1380px;min-height:0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
+.left{display:block;min-height:0}
+.right{position:sticky;top:24px;align-self:start;padding-top:clamp(90px,8vw,121px);max-height:calc(100svh - 24px);overflow-y:auto}
+.left .philosophy{padding:32px 0 90px;border:0}
+.left .reading{max-width:none}
+}
+.story-link-paragraph{font:inherit;margin:0 0 18px}
+.story-link-paragraph .behind-link{font:inherit;letter-spacing:normal;color:var(--ink);padding:0;margin:0;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:850px){
+.intro-heading{display:contents}
+.intro-heading h1{order:1}
+.right{order:2}
+.intro-heading .opening-line{order:3;margin:12px 0 20px}
+.left-story{order:4}
+.left-story>.intro-copy:nth-child(2){display:none}
+.left>.philosophy{order:5}
+.mobile-explanation{display:block}
+.left .philosophy{padding:32px 0 65px}
+}
+.reading .story-quote{margin:8px 0 24px;padding:0 0 0 20px;border-left:2px solid var(--line);font:italic 400 clamp(22px,2.3vw,30px)/1.45 Georgia,serif;color:var(--ink)}.reading h3.process-heading{font:400 clamp(21px,2.1vw,28px)/1.3 Georgia,serif;letter-spacing:-.015em;margin:36px 0 14px}
+/* Align status notes with the top of the download buttons. */
+.canvas-footer{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-top:10px}
+.canvas-footer #status{flex:1;min-width:0;min-height:0;margin:0;padding:0;font-size:12px;line-height:1.45;color:#616662}
+.canvas-footer .download-actions{flex:0 0 auto;margin:0}
+
+/* Secret entry has no visual focus treatment, including keyboard focus. */
+#secret:focus,#secret:focus-visible,#secret:active{outline:none!important;outline-offset:0!important;box-shadow:none!important;border-color:#a9aca5!important;appearance:none}
+</style></head><body>
+<section class="hero" aria-labelledby="page-title">
+<div class="hero-grid">
+<div class="left">
+<div class="intro-heading"><h1 id="page-title">Secret Hashes</h1>
+<p class="opening-line"><strong>Once you know a secret, it no longer is one.</strong></p></div>
+<div class="left-story">
+<p class="intro-copy">This is the kind of paradox I loved thinking about as a kid, like how you can’t seek enlightenment directly; how you’ll never know whether the red <em>you</em> see is the same red I do; how some ideas are forgotten while others are one-way valves, offering perspectives which, once you see them, can’t be unseen. But what if there was a way to share a secret while still keeping it? What if there was a way to entrust someone with your deepest truths without actually being vulnerable with them?</p>
+<p class="intro-copy"><strong>Secret Hashes</strong> offers you the opportunity to do just this. Using the one-way valve of cryptographic hash functions and the power of random walks to encode your secrets, you can share your sacred truths, vulnerability-free.</p>
+
+<figure class="product-mosaic"><img src="./assets/secret-hashes-products.jpg" alt="Secret Hashes scribble artwork printed on a greeting card, hoodie, tote bag, and mug"></figure>
+<p class="merch-line">Send it on a greeting card. Wear it on a hoodie. Share it with the world.</p>
+<p class="story-link-paragraph"><a class="behind-link" href="#philosophy">Behind the scribbles ↓</a></p>
+</div>
+<section id="philosophy" class="philosophy"><article class="reading"><h2>A secret, for example</h2><blockquote class="story-quote">You are my father.</blockquote><div class="father-story">
+				
 				<div class="father">
 					<p>
 						When I was 20 years old, I found out that the man I’d always called dad wasn’t my biological father. This didn’t change who I saw as my dad, though the secret was hard to process. My parents had gone out of their way to lie to me for two decades. It was a lot. 
 					</p>
 					<p>
-						 then, I’ve learnt my biodad’s name, and I’m not ashamed to share that I regularly google him. He has a whole life, a wife and kids, and he’s a marathon runner—which is strange, because I am too. I don’t want to reconnect with him as a dad, and I definitely don’t want to mess up his current life, but the marathon thing is weird, right?
+						Since then, I’ve learnt my biodad’s name, and I’m not ashamed to share that I google him, regularly. He has a whole life, a wife and kids, and he’s a marathon runner—which is strange, because I am too. I don’t want to reconnect with him as a dad, and I definitely don’t want to mess up his current life, but the marathon thing is weird, right?
 					</p>
 					<p>
 						I’d love to grab a drink with him sometime just to hear his voice, see where my Italian moustache and summer tans come from, find out if there is anything else we have in common. But I’m not quite ready yet. Instead, I’d like to send him an unsigned note of appreciation “from a neighbor,” with a scribble on the front that secretly shares, “You are my father.” 
@@ -310,36 +157,25 @@ aside #scribble svg { display: block; width: 100%; height: 100%; }
 
 			<h2>What's this all about?</h2>
 			<p>
-				For a long time, I’d say I made an applied study of performed vulnerability. By narrowing the scope of what I held sacred, I shrank the sphere of things I held secret. And, this meant I grew the sphere of things I was comfortable sharing. In fact, I grew it large enough that I’d often leave “intimate” exchanges unmoved, noticing a vulnerability asymmetry when conversational counterparts would express appreciation for the deep connection they felt we’d shared—an appreciation I couldn’t reciprocate.
+				For a long time, I’d say I made an applied study of performed vulnerability. By narrowing the scope of what I held sacred, I shrank the sphere of things I kept secret and grew the sphere of things I was comfortable sharing. In fact, I grew it large enough that I’d often leave “intimate” exchanges unmoved. There was a vulnerability asymmetry when conversation counterparts would express appreciation for the deep connection they felt we’d shared, an appreciation I didn’t reciprocate.
 			</p>
-			<dl>
-				<dt>Why is my last name different from my family’s?</dt>
-				<dd>Sure, I’ll tell.</dd>
-				<dt>How did growing up in a small, conservative town mess me up?</dt>
-				<dd>Let me count the ways.</dd>
-				<dt>What body image issues consumed me through my teens and twenties?</dt>
-				<dd>It was a dark time. You sitting down?</dd>
- 			</dl>
-			<p>
-				By narrativizing and then distancing myself from the sharp edges of my own experiences, I was able to share them without really sharing myself. Rather than continuing this practice entirely on the inside and on my own, I’ve decided to externalize and share it in the form of Secret Hashes. I invite you to tell your own secrets through these playful scribbles, sending them to friends and neighbors, family and strangers. And, if you’re interested in the insides of the scribble generating tool, that’s no secret either!			</p>
+			
+			<p>By sharing only once I've narrativized an experience, I distance myself from the sharp edges of my own experiences. It allows me to share stories without really sharing myself, without inviting others into my process of processing.</p>
+<p>Rather than continuing this at least somewhat maladaptive practice on my own, I’ve decided to share it, in the form of Secret Hashes. I invite you to tell your own secrets without telling them, turning them into playful scribbles, sending them to friends and neighbors, family and strangers. And, if you’re interested in the insides of the scribble generating tool, that’s no secret either!</p>
 			<h2>
 				How does it work?
 			</h2>
 			<p>
-				The whole thing is pretty simple. Your greeting card is generated in a four-part process: SECRET -> HASH -> SCRIBBLE -> PRINT + SHARE
+				The whole thing is pretty simple. Your scribble is generated in a four-part process: secret → hash → scribble → print + share
 			</p>
-			<h2>
-				First, you will write and submit your SECRET.
-			</h2>
+			<h3 class="process-heading">First, you will write your secret.</h3>
 			<p>
 				Just as you would in a diary, we invite you to express your secret in your own voice. Try saying it in different ways. Roll it around on your tongue. Listen to how it sounds expressed in different styles. Express it briefly, loudly, directly, in a single utterance. 
 			</p>
 			<p>
-				Your secret stays in your browser. It is hashed locally and never submitted to a server.
+				And don’t worry. Your secret stays in your browser. It is hashed locally and never submitted to a server.
 			</p>
-			<h2>
-				Then, your secret is translated into a HASH.
-			</h2>
+			<h3 class="process-heading">Then, your secret is translated into a hash.</h3>
 				<p>
 					In the real world, hashes are used for verification purposes. For example, when receiving a file, you can compare the hash you get by running the file through a hash function to the hash the sender got by doing the same. If they match, you know that the file was unchanged between when it was sent and received. If the hashes are different, it was tampered with. Email, digital signatures, and many version control services rely on this technology. Secret Hashes does too.
 				</p>
@@ -355,9 +191,7 @@ aside #scribble svg { display: block; width: 100%; height: 100%; }
 				<p>
 					In this way, hash functions are able to translate an infinite number of possible inputs (whether a single sentence secret or The Collected Poems of Langston Hughes) into one of many, many possible fixed length hashes (in the case of this project, a string of 154 numbers), one which is always the same and cannot be reverse engineered, meaning your secret cannot be decoded from your hash or from the scribble we draw with it.
 				</p>
-			<h2>
-				Next, your hash is encoded in a SCRIBBLE. 
-			</h2>
+			<h3 class="process-heading">Next, your hash is encoded in a scribble.</h3>
 			<p>
 				This is done by splitting the hash up into its individual digits and interpreting those digits as directions for how to draw a scribble. This part of the translation takes inspiration from Seymour Papert’s LOGO programming language, which allows users to reason in an embodied way about geometry. To understand this part of the encoding process, imagine you are a turtle holding a pen standing on the front of a blank greeting card. Your instructions are to touch the pen to the surface of the greeting card and follow these instructions:
 			</p>
@@ -378,32 +212,22 @@ aside #scribble svg { display: block; width: 100%; height: 100%; }
 			<p>
 				Play around with the algorithm to produce different scribbles until you find one you like. 
 			</p>
-			<h2>
-				Now, you’re ready to PRINT your scribble on a greeting card and SHARE YOUR SECRET with the world. 
-			</h2>
+			<h3 class="process-heading">Now, you’re ready to share your secret.</h3>
 			<p>
-				The scribble shown here can be downloaded as a scalable SVG or high-resolution PNG, ready to print as a greeting card. The original secret stays in your browser.		
+				The scribble shown here can be downloaded as a scalable SVG or high-resolution PNG, ready to use in whatever way you’d like.		
 			</p>
-		</main>
+		</article></section>
+</div>
+<div class="right">
+<div class="secret-entry"><label class="prompt" for="secret">Encode your secret</label>
+<p class="intro-copy mobile-explanation"><strong>Secret Hashes</strong> offers you the opportunity to do just this. Using the one-way valve of cryptographic hash functions and the power of random walks to encode your secrets, you can share your sacred truths, vulnerability-free.</p>
+<p class="prompt-note">Type a secret and click Draw. You can redraw the same secret as many times as you like, then download it to print or share.</p>
+<div class="entry-row"><textarea id="secret" rows="2" aria-label="Your secret" spellcheck="false" autocomplete="off"></textarea><button id="drawButt" type="button"><span id="drawButtText">draw</span></button></div>
+</div>
 
-		<aside>
-			<div class="scribble-inputs">
-				<input id="secret" type="text" autocomplete="off" spellcheck="false" aria-label="Your secret" placeholder="Type your secret here."/>
-				<button id="drawButt" type="button">
-					
-					<span id="drawButtText">draw</span>
-				</button>
-			</div>
-			<div id="scribble" role="img" aria-label="Generated secret scribble">
-				<div id="no-secret" class="invisible">You need to type a secret first!</div>
-				<div id="no-scribble" class="invisible">You need to draw a scribble first!</div>
-			</div>
-			<div class="scribble-inputs">
-				<button id="download-svg" type="button" disabled>Download SVG</button><button id="download-png" type="button" disabled>Download PNG</button>
-			</div>
-		<div id="status" role="status" aria-live="polite">Type a secret, then draw.</div></aside>
-	</div>
-		
-	<script src="./script.js"></script>
-</body>
-</html>
+<div id="scribble" role="img" aria-label="Your generated secret scribble"><div id="no-secret" hidden></div><div id="no-scribble" hidden></div></div>
+<div class="canvas-footer"><div id="status" role="status" aria-live="polite"></div><div class="download-actions"><button id="download-svg" type="button" disabled>↓ SVG</button><button id="download-png" type="button" disabled>↓ PNG</button></div></div>
+</div></div>
+</section>
+
+<script src="./landing.js"></script></body></html>
